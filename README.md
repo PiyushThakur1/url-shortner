@@ -2,10 +2,9 @@
 
 A simple Url Shortener built with Node.js and Express.
 
-## 🚀 Demo Video
+## Demo Video
 
-[![Watch the demo video](https://i.vimeocdn.com/video/2038362845-34b03878868eb0d081196ab01df307b6fdd55629fed92732062135a55e841146-d_295x166?region=us)](https://vimeo.com/1102586584)
-
+[Watch Demo Video](https://github.com/user-attachments/assets/718aa1e1-6c0f-43e2-b285-f2630399150d)
 
 ## Tech Stack
 
