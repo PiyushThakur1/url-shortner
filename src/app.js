@@ -47,24 +47,24 @@ function validateUrl(req, res, next) {
 }
 
 app.post("/shorten", validateUrl, async (req, res) => {
+  const { url } = req.body;
 
-    const shortId = nanoid(6);
-    const shortUrl = `http://localhost:3000/${shortId}`;
+  const shortId = nanoid(6);
+  const shortUrl = `http://localhost:3000/${shortId}`;
 
-    const urlData = await readUrlFile();
-    const newEntry = {
-      url: url,
-      clicks: 0,
-    };
-    urlData[shortId] = newEntry;
-    await writeUrlFile(urlData);
+  const urlData = await readUrlFile();
+  const newEntry = {
+    url: url,
+    clicks: 0,
+  };
+  urlData[shortId] = newEntry;
+  await writeUrlFile(urlData);
 
-    res.status(201).json({
-      originalUrl: url,
-      shortUrl,
-      shortId,
-    });
-
+  res.status(201).json({
+    originalUrl: url,
+    shortUrl,
+    shortId,
+  });
 });
 
 app.get("/:shortId", async (req, res) => {
