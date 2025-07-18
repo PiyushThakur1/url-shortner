@@ -37,15 +37,16 @@ async function writeUrlFile(data) {
   await fs.writeFile(file, jsonData, "utf-8");
 }
 
-app.post("/shorten", async (req, res) => {
-  try {
-    const { url } = req.body;
+function validateUrl(req, res, next) {
+  const { url } = req.body;
+  if (!url || typeof url !== "string") {
+    return res.status(400).json({ message: "Invalid or Missing originalUrl" });
+  }
 
-    if (!url || typeof url !== "string") {
-      return res
-        .status(400)
-        .json({ message: "Invalid or Missing originalUrl" });
-    }
+  next();
+}
+
+app.post("/shorten", validateUrl, async (req, res) => {
 
     const shortId = nanoid(6);
     const shortUrl = `http://localhost:3000/${shortId}`;
@@ -63,9 +64,7 @@ app.post("/shorten", async (req, res) => {
       shortUrl,
       shortId,
     });
-  } catch (err) {
-    res.status(500).json({ error: "Something went wrong" });
-  }
+
 });
 
 app.get("/:shortId", async (req, res) => {
